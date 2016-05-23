@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+
+<generatorConfiguration>
+
+
+	<context id="mysqlMap" targetRuntime="MyBatis3">
+
+		<property name="beginningDelimiter" value="`" />
+		<property name="endingDelimiter" value="`" />
+
+		<plugin type="com.loof.mybatis.plugin.ModelAndExampleBaseClassPlugin">
+			<property name="baseCLassNamePrefix" value="Base" />
+			<property name="basePackage" value="com.loof.common.model.base" />
+			<property name="extXmlPackage" value="com.loof.common.mapper.ext" />
+		</plugin>
+		<plugin type="com.loof.mybatis.plugin.ModelAndExamplePlugin" />
+
+		<plugin type="com.loof.mybatis.plugin.MysqlPaginationPlugin" />
+		<plugin type="com.loof.mybatis.plugin.BooleanColumnPlugin" />
+
+		<plugin type="com.loof.mybatis.plugin.MapperPlugin">
+			<property name="daoTargetDir" value="src/main/java" />
+			<property name="daoTargetPackage" value="com.loof.common.mapper" />
+			<property name="daoSuperClass" value="com.loof.generic.GenericMapper" />
+		</plugin>
+
+
+
+
+
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<!-- 数据库连接配置 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/vst_weixin" userId="dev"
+			password="sweXeRcEWdrVCJuF">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!--model 代码 生成路径 -->
+		<javaModelGenerator targetPackage="com.loof.common.model"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!--mapper.xml 代码 生成路径 -->
+		<sqlMapGenerator targetPackage="com.loof.common.mapper"
+			targetProject="src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!-- 通用Mapper接口的配置，配置javaClientGenerator后会生成对应的接口文件，该接口会自动继承前面配置的通用Mapper接口 -->
+		<!-- <javaClientGenerator targetPackage="com.loof.common.mapperbase"
+			targetProject="src\main\java" type="XMLMAPPER" /> -->
+
+
+
+		<!-- 这里使用SQL通配符%来匹配所有表。generatedKey意味着所有的表都有一个id自增的主键，在生成实体类的时候会根据该配置生成相应的注解 -->
+		<table tableName="%" domainObjectName="">
+			<!-- <generatedKey column="id" sqlStatement="Mysql" identity="false" /> -->
+		</table>
+
+
+	</context>
+</generatorConfiguration>
