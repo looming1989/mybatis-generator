@@ -1,4 +1,4 @@
-package com.loof.generic;
+package com.liuluming.generic;
 
 import java.util.List;
 
