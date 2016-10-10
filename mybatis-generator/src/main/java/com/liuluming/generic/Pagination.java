@@ -2,10 +2,16 @@ package com.liuluming.generic;
 
 import java.util.List;
 
-public class Pagination {
+public class Pagination<T> {
 
+	/**
+	 * 默认每页最大记录数：10。
+	 */
 	public static final Integer DEFAULT_PAGE_SIZE = 10;
 
+	/**
+	 * 默认当前页：1。
+	 */
 	public static final Integer DEFAULT_CURRENT_PAGE = 1;
 
 	/**
@@ -19,11 +25,14 @@ public class Pagination {
 	private Integer totalRowNumber;
 
 	/**
-	 * 当前页码,默认第1页,从1开发算起
+	 * 当前页码（从1算起）
 	 */
 	private Integer currentPage;
 
-	private List dataList;
+	/**
+	 * 返回的数据集合
+	 */
+	private List<T> dataList;
 
 	public Pagination() {
 		this(DEFAULT_PAGE_SIZE, 1);
@@ -40,15 +49,14 @@ public class Pagination {
 	}
 
 	public void setCurrentPage(Integer currentPage) {
-		this.currentPage = (currentPage == null ? DEFAULT_CURRENT_PAGE
-				: currentPage);
+		this.currentPage = (currentPage == null ? DEFAULT_CURRENT_PAGE : currentPage);
 	}
 
 	public void setTotalRowNumber(Integer totalRowNumber) {
 		this.totalRowNumber = (totalRowNumber == null ? 0 : totalRowNumber);
 	}
 
-	public void setDataList(List dataList) {
+	public void setDataList(List<T> dataList) {
 		this.dataList = dataList;
 	}
 
@@ -81,11 +89,10 @@ public class Pagination {
 	}
 
 	public boolean isLastPage() {
-		return currentPage >= (int) Math.ceil((this.totalRowNumber * 1.0d)
-				/ this.pageSize);
+		return currentPage >= (int) Math.ceil((this.totalRowNumber * 1.0d) / this.pageSize);
 	}
 
-	public List getDataList() {
+	public List<T> getDataList() {
 		return dataList;
 	}
 

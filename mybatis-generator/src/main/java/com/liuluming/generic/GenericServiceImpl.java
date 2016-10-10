@@ -3,20 +3,44 @@ package com.liuluming.generic;
 import java.util.List;
 
 /**
- * @author johnny wang
+ * 通用的service类
+ * 
+ * @author liuluming
  *
  * @param <T>
+ *            Model
  * @param <TE>
+ *            ModelExample
  * @param <PK>
+ *            Model主键类型
  */
-public abstract class GenericServiceImpl<T extends Object, TE extends Object, PK> implements
-		GenericService<T, TE, PK> {
+public abstract class GenericServiceImpl<T extends Object, TE extends Object, PK> implements GenericService<T, TE, PK> {
 
 	protected abstract GenericMapper<T, TE, PK> getGenericMapper();
 
 	@Override
-	public int deleteByPrimaryKey(PK id) {
-		return this.getGenericMapper().deleteByPrimaryKey(id);
+	public int deleteByExamplePhysically(TE example) {
+		return this.getGenericMapper().deleteByExamplePhysically(example);
+	}
+
+	@Override
+	public int deleteByPrimaryKeyPhysically(PK id) {
+		return this.getGenericMapper().deleteByPrimaryKeyPhysically(id);
+	}
+
+	@Override
+	public int deleteByPrimaryKeysPhysically(PK[] ids) {
+		return this.getGenericMapper().deleteByPrimaryKeysPhysically(ids);
+	}
+
+	@Override
+	public int deleteByPrimaryKeyLogically(PK id) {
+		return this.getGenericMapper().deleteByPrimaryKeyLogically(id);
+	}
+
+	@Override
+	public int deleteByPrimaryKeysLogically(PK[] ids) {
+		return this.getGenericMapper().deleteByPrimaryKeysLogically(ids);
 	}
 
 	@Override
@@ -49,25 +73,20 @@ public abstract class GenericServiceImpl<T extends Object, TE extends Object, PK
 		return this.getGenericMapper().selectByExample(entity);
 	}
 
-    @Override
-    public int countByExample(TE example) {
-        return this.getGenericMapper().countByExample(example);
-    }
+	@Override
+	public int countByExample(TE example) {
+		return this.getGenericMapper().countByExample(example);
+	}
 
-    @Override
-    public int deleteByExample(TE example) {
-        return this.getGenericMapper().deleteByExample(example);
-    }
+	@Override
+	public int updateByExampleSelective(T record, TE example) {
+		return this.getGenericMapper().updateByExampleSelective(record, example);
+	}
 
-    @Override
-    public int updateByExampleSelective(T record, TE example) {
-        return this.getGenericMapper().updateByExampleSelective(record, example);
-    }
-
-    @Override
-    public int updateByExample(T record, TE example) {
-        return this.getGenericMapper().updateByExample(record, example);
-    }
+	@Override
+	public int updateByExample(T record, TE example) {
+		return this.getGenericMapper().updateByExample(record, example);
+	}
 
 	@Override
 	public List<T> queryAll() {

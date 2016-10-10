@@ -12,9 +12,11 @@
 		<plugin type="com.liuluming.generator.plugins.ModelAndExampleBaseClassPlugin">
 			<property name="baseCLassNamePrefix" value="Base" />
 			<property name="basePackage" value="com.liuluming.model.base" />
-			<property name="extXmlPackage" value="com.liuluming.mapper.ext" />
+			<property name="extXmlPackage" value="com.liuluming.mapper" />
 		</plugin>
 		<plugin type="com.liuluming.generator.plugins.ModelAndExamplePlugin" />
+		<plugin type="com.liuluming.generator.plugins.DeleteLogicallyPlugin" />
+		<plugin type="com.liuluming.generator.plugins.DeletePhysicallyPlugin" />
 
 		<plugin type="com.liuluming.generator.plugins.MysqlPaginationPlugin" />
 		<plugin type="com.liuluming.generator.plugins.BooleanColumnPlugin" />
@@ -60,7 +62,7 @@
 
 
 		<!-- 这里使用SQL通配符%来匹配所有表。generatedKey意味着所有的表都有一个id自增的主键，在生成实体类的时候会根据该配置生成相应的注解 -->
-		<table tableName="%" domainObjectName="" enableCountByExample="true" >
+		<table tableName="t_card" domainObjectName="Card" enableCountByExample="true" >
 			<!-- <generatedKey column="id" sqlStatement="Mysql" identity="false" /> -->
 			
 		</table>
